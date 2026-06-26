@@ -1,0 +1,36 @@
+# Sensitive files - DO NOT COMMIT
+config.py
+oauth_credentials.json
+token.pickle
+creds.json
+
+# Data files
+data/admin_users.json
+data/admin_chats.json
+data/allowed_users.json
+data/audit.log
+data/receipts/*
+
+# Logs
+*.log
+bot.log
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+
+# Environment variables
+.env
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS files
+.DS_Store
+Thumbs.db
