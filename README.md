@@ -1,265 +1,200 @@
 # Telegram Expense Claims Bot 🤖💰
 
-A comprehensive Telegram bot for managing expense claims with Google Sheets integration and Windows service support.
+A portable Telegram bot for expense claim management with Google Sheets integration, admin controls, and Windows service support.
 
-## ✨ Features
+## ✨ What this project includes
 
-- 📱 **Telegram Integration**: Submit expense claims directly through Telegram
-- 📊 **Google Sheets**: Automatic data sync to Google Sheets
-- 👥 **User Management**: Admin and user role management
-- 🔐 **OAuth Authentication**: Secure Google API integration
-- 🖥️ **Windows Service**: Run as a background service
-- 🎛️ **GUI Configurator**: Easy setup and configuration interface
-- 📝 **Audit Logging**: Track all bot activities
-- 🔄 **Auto Token Refresh**: Automatic OAuth token management
+- Telegram expense claim submission
+- Admin approval workflow
+- Google Sheets and Drive integration
+- OAuth 2.0 authentication support
+- Windows service installer and controller
+- GUI configuration tool
+- Audit logging and debugging support
 
-## 🚀 Quick Start
+## 🚀 Recommended Setup
 
-### Method 1: Setup Wizard (Recommended)
-1. Download or clone this repository
-2. Run `setup_wizard.bat` as Administrator
-3. Follow the interactive setup process
-4. Use the GUI configurator for easy configuration
+### Option 1: Setup Wizard (Recommended)
+1. Open PowerShell or Command Prompt as Administrator
+2. Run `setup_wizard.bat`
+3. Follow the prompts to install dependencies and create default config files
+4. Open `python configurator.py` to finish configuration if needed
 
-### Method 2: Manual Setup
-1. Install Python 3.8+ from [python.org](https://python.org)
-2. Install required packages:
-   ```bash
-   pip install python-telegram-bot google-api-python-client google-auth-httplib2 google-auth-oauthlib pywin32
+### Option 2: Manual Setup
+1. Install Python 3.8+ from https://python.org
+2. Install dependencies:
+   ```powershell
+   pip install -r requirements.txt
    ```
-3. Copy example files:
-   ```bash
+3. Copy template configuration files:
+   ```powershell
    copy config_example.py config.py
    copy oauth_credentials_example.json oauth_credentials.json
+   copy data\admin_users_example.json data\admin_users.json
+   copy data\allowed_users_example.json data\allowed_users.json
    ```
-4. Edit configuration files with your settings
-5. Run the bot: `python bot.py`
-
-## 🎛️ Configuration Interface
-
-Launch the GUI configurator for easy setup:
-```bash
-python configurator.py
-```
-
-The configurator provides:
-- **Bot Configuration**: Set bot token, name, and basic settings
-- **Google Integration**: Configure OAuth and Google Sheets
-- **User Management**: Manage admins and allowed users
-- **Service Control**: Install, start, stop Windows service
-- **Logs & Monitoring**: View real-time logs and status
+4. Edit `config.py`, `oauth_credentials.json`, `data/admin_users.json`, and `data/allowed_users.json`
+5. Run the bot with `python bot.py`, `python start_bot.py`, or `run_bot.bat`
 
 ## 🔧 Configuration Files
 
-### config.py
-Main bot configuration:
+### `config.py`
+This file contains the main bot configuration values.
+
+Example:
 ```python
-BOT_TOKEN = "your_bot_token_here"
+BOT_TOKEN = "1234567890:ABCdefGHIjklMNOpqrsTUVwxyz"
 BOT_NAME = "Expense Claims Bot"
-DRIVE_FOLDER_ID = "your_google_drive_folder_id"
-SHEET_TYPE = "expense_tracker"  # or "receipt_log", "financial_report", "custom"
+DRIVE_FOLDER_ID = "1AbCdEfGhIjKlMnOpQrStUvWxYz"
+SHEET_TYPE = "expense_tracker"
 DEFAULT_CURRENCY = "USD"
 TIMEZONE = "UTC"
 ```
 
-### oauth_credentials.json
-Google OAuth 2.0 credentials:
-```json
-{
-  "installed": {
-    "client_id": "your_client_id",
-    "client_secret": "your_client_secret",
-    "auth_uri": "https://accounts.google.com/o/oauth2/auth",
-    "token_uri": "https://oauth2.googleapis.com/token"
-  }
-}
-```
+### `oauth_credentials.json`
+Google OAuth 2.0 credentials for your desktop application.
 
-### data/admin_users.json
-List of admin usernames:
+### `data/admin_users.json`
+Admin Telegram usernames.
+
+Example:
 ```json
 ["admin_username1", "admin_username2"]
 ```
 
-### data/allowed_users.json
-List of allowed user usernames:
+### `data/allowed_users.json`
+Allowed Telegram usernames.
+
+Example:
 ```json
 ["user1", "user2", "user3"]
 ```
 
-## 🤖 Getting a Bot Token
+## 📝 Running the Bot
 
-1. Message [@BotFather](https://t.me/botfather) on Telegram
-2. Send `/newbot` and follow the instructions
-3. Choose a name and username for your bot
-4. Copy the bot token provided
-5. Add the token to your `config.py` file
+### Run directly
+```powershell
+python bot.py
+```
 
-## 🔗 Google Sheets Setup
+### Run via the launcher
+```powershell
+python start_bot.py
+```
 
-1. Go to [Google Cloud Console](https://console.cloud.google.com/)
-2. Create a new project or select existing one
-3. Enable Google Sheets API and Google Drive API
-4. Create OAuth 2.0 credentials (Desktop Application)
-5. Download the credentials file as `oauth_credentials.json`
-6. Create a Google Drive folder and copy its ID
-7. Add the folder ID to your `config.py`
+### Run using portable batch helper
+```powershell
+run_bot.bat
+```
 
-## 🖥️ Windows Service Installation
+## 🖥️ Windows Service Commands
 
-### Using GUI Configurator
-1. Open configurator: `python configurator.py`
-2. Go to "Service Control" tab
-3. Click "Install as Windows Service"
-4. Use Start/Stop buttons to control the service
-
-### Using Command Line
-```bash
-# Install service
+### Install service
+```powershell
 python service_installer.py install
+```
 
-# Start service
+### Start service
+```powershell
 python service_installer.py start
+```
 
-# Stop service
+### Stop service
+```powershell
 python service_installer.py stop
+```
 
-# Check status
+### Restart service
+```powershell
+python service_installer.py restart
+```
+
+### Check status
+```powershell
 python service_installer.py status
-
-# Uninstall service
-python service_installer.py uninstall
 ```
 
 ## 📱 Bot Commands
 
-### User Commands
-- `/start` - Start the bot and see available commands
-- `/claim` - Submit a new expense claim
-- `/history` - View your expense history
-- `/cancel` - Cancel current operation
+### User commands
+- `/start` — Start the bot and show available commands
+- `/claim` — Submit a new expense claim
+- `/history` — View recent claims
+- `/cancel` — Cancel the current operation
 
-### Admin Commands
-- `/summary` - View expense summary
-- `/download` - Download expense data
-- `/dashboard` - Admin dashboard
-- `/adduser` - Add allowed user
-- `/removeuser` - Remove allowed user
-- `/listusers` - List allowed users
-- `/addadmin` - Add admin user
-- `/removeadmin` - Remove admin user
-- `/listadmins` - List admin users
-- `/pending` - View pending approvals
-- `/cleanup` - Cleanup old receipts
-- `/auditlog` - Download audit log
-
-## 📋 Sheet Types
-
-### Expense Tracker (Default)
-Basic expense tracking with categories and approval workflow.
-
-### Receipt Log
-Detailed receipt logging with image storage and metadata.
-
-### Financial Report
-Comprehensive financial reporting with analytics.
-
-### Custom
-Define your own sheet structure and fields.
-
-## 🔧 Environment Variables
-
-You can override configuration using environment variables:
-- `TELEGRAM_BOT_TOKEN` - Override bot token
-- `GOOGLE_DRIVE_FOLDER_ID` - Override Google Drive folder
-- `BOT_ENV` - Set to "production" for production mode
-
-## 📊 Monitoring & Logs
-
-### Log Files
-- `bot.log` - Main bot activity log
-- `service.log` - Windows service log (when running as service)
-- `data/audit.log` - User activity audit log
-
-### GUI Monitoring
-Use the configurator's "Logs & Status" tab to:
-- View real-time logs
-- Monitor service status
-- Export logs for analysis
-
-## 🔒 Security Features
-
-- **OAuth 2.0**: Secure Google API authentication
-- **User Whitelisting**: Control who can use the bot
-- **Admin Roles**: Separate admin and user permissions
-- **Audit Logging**: Track all user activities
-- **Token Encryption**: Secure token storage
-- **Auto Refresh**: Automatic token renewal
-
-## 🛠️ Troubleshooting
-
-### Common Issues
-
-**Bot not responding:**
-- Check bot token is correct
-- Verify bot is running
-- Check internet connection
-
-**Google Sheets not working:**
-- Verify OAuth credentials
-- Check Google Drive folder permissions
-- Ensure APIs are enabled
-
-**Service won't start:**
-- Run as Administrator
-- Check service logs
-- Verify configuration files
-
-**Permission denied:**
-- Run setup as Administrator
-- Check file permissions
-- Verify user has service install rights
-
-### Getting Help
-
-1. Check the logs in the configurator
-2. Verify all configuration files are correct
-3. Test the bot manually before installing as service
-4. Check Windows Event Viewer for service errors
+### Admin commands
+- `/summary` — View expense summary
+- `/download` — Download expense data
+- `/dashboard` — Open admin dashboard
+- `/adduser` — Add allowed user
+- `/removeuser` — Remove allowed user
+- `/listusers` — List allowed users
+- `/addadmin` — Add admin user
+- `/removeadmin` — Remove admin user
+- `/listadmins` — List admin users
+- `/pending` — View pending approvals
+- `/cleanup` — Clean up old receipts
+- `/auditlog` — Download the audit log
+- `/listsheets` — List available Google Sheets
 
 ## 📁 Project Structure
 
 ```
 telegram_bot_portable_final/
-├── bot.py                      # Main bot entry point
-├── configurator.py             # GUI configuration tool
-├── service_installer.py        # Windows service installer
-├── setup_wizard.bat           # Interactive setup script
-├── config.py                  # Bot configuration
-├── config_example.py          # Configuration template
-├── oauth_credentials.json     # Google OAuth credentials
-├── requirements.txt           # Python dependencies
-├── README.md                  # This file
-├── .gitignore                 # Git ignore rules
-├── data/                      # Data storage
-│   ├── admin_users.json      # Admin users list
-│   ├── allowed_users.json    # Allowed users list
-│   ├── audit.log             # Audit log
-│   └── receipts/             # Receipt images
-├── handlers/                  # Bot message handlers
-│   ├── admin_handlers.py     # Admin commands
-│   ├── user_handlers.py      # User commands
-│   ├── conversation_handlers.py # Multi-step conversations
-│   └── ...
-├── services/                  # Background services
-│   ├── oauth_manager.py      # OAuth management
-│   ├── token_scheduler.py    # Token refresh scheduler
-│   └── ...
-└── utils/                     # Utility functions
-    ├── admin_manager.py      # Admin management
-    ├── auth.py               # Authentication
-    └── ...
+├── bot.py
+├── configurator.py
+├── service_installer.py
+├── setup_wizard.bat
+├── start_bot.py
+├── run_bot.bat
+├── run_bot.ps1
+├── config.py
+├── config_example.py
+├── oauth_credentials.json
+├── oauth_credentials_example.json
+├── requirements.txt
+├── README.md
+├── data/
+│   ├── admin_users.json
+│   ├── allowed_users.json
+│   ├── audit.log
+│   └── receipts/
+├── handlers/
+├── services/
+└── utils/
 ```
+
+## 🛠️ Troubleshooting
+
+### Bot startup issues
+- Confirm `config.py` exists and contains a valid `BOT_TOKEN`
+- Verify `DRIVE_FOLDER_ID` is set if Google Sheets integration is enabled
+- Make sure `oauth_credentials.json` is present and valid JSON
+- Check `bot.log` for errors
+- Run `python bot.py` directly to see startup output
+
+### Google Sheets / OAuth issues
+- Ensure Google Sheets API and Drive API are enabled in Google Cloud
+- Verify OAuth credentials match your desktop app configuration
+- Confirm the Drive folder is accessible from the OAuth user
+- Check for permission or scope errors in logs
+
+### Windows service issues
+- Run installation commands as Administrator
+- Verify `pywin32` is installed
+- Check `service.log` for service errors
+- Use `python service_installer.py status` to inspect service state
+
+### Permissions and file problems
+- Ensure repository files and `data/` folder are writable
+- Confirm `data/admin_users.json` and `data/allowed_users.json` contain valid arrays
+- If using the portable Python runtime, make sure the `python/` folder exists and contains `python.exe`
+
+### Common fixes
+- Re-run `setup_wizard.bat` if configuration is missing or invalid
+- Use `python configurator.py` for guided configuration
+- Restart the bot or service after changing `config.py`
+- Inspect `bot.log` and `service.log` for the root cause
 
 ## 🤝 Contributing
 
@@ -271,13 +206,7 @@ telegram_bot_portable_final/
 
 ## 📄 License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## 🙏 Acknowledgments
-
-- [python-telegram-bot](https://github.com/python-telegram-bot/python-telegram-bot) - Telegram Bot API wrapper
-- [Google APIs](https://developers.google.com/sheets/api) - Google Sheets integration
-- [PyWin32](https://github.com/mhammond/pywin32) - Windows service support
+This project is licensed under the MIT License. See the `LICENSE` file for details.
 
 ---
 
