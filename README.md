@@ -208,57 +208,6 @@ telegram_bot_portable_final/
 
 This project is licensed under the MIT License. See the `LICENSE` file for details.
 
----
-
-**Made with ❤️ for expense management automation**
-
-A powerful Telegram bot for managing expense claims with Google Sheets integration and admin approval workflows.
-
-## ✨ Features
-
-- � **Expense Claim Submission** - Users can submit claims with descriptions, amounts, and receipt photos
-- 👑 **Admin Approval System** - Admins can approve/reject claims with reasons
-- 📊 **Google Sheets Integration** - Automatic data sync to Google Sheets
-- 🔐 **User Management** - Add/remove users and admins
-- 📈 **Dashboard & Reports** - View summaries, history, and audit logs
-- 🚀 **Portable** - Includes embedded Python runtime (no installation required)
-
-## 🚀 Quick Setup
-
-### 1. Download & Extract
-1. Download this repository
-2. Extract to your desired location
-
-### 2. Get Your Bot Token
-1. Message [@BotFather](https://t.me/BotFather) on Telegram
-2. Create a new bot with `/newbot`
-3. Copy your bot token
-
-### 3. Set Up Google Sheets Integration
-1. Go to [Google Cloud Console](https://console.cloud.google.com/)
-2. Create a new project (or use existing)
-3. Enable Google Sheets API and Google Drive API
-4. Create credentials (OAuth 2.0 Client ID for Desktop Application)
-5. Download the credentials JSON file
-
-### 4. Configure the Bot
-
-#### Option A: Copy Example Files (Recommended)
-```batch
-copy config_example.py config.py
-copy oauth_credentials_example.json oauth_credentials.json
-copy data\admin_users_example.json data\admin_users.json
-copy data\allowed_users_example.json data\allowed_users.json
-```
-
-#### Option B: Set Environment Variables
-```batch
-set BOT_TOKEN=your_bot_token_here
-set ADMIN_USERNAMES=your_username,another_admin
-set DRIVE_FOLDER_ID=your_google_drive_folder_id
-set SPREADSHEET_NAME=MY_EXPENSE_CLAIMS
-```
-
 ### 5. Edit Configuration Files
 
 #### Edit `config.py`:
